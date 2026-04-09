@@ -1,0 +1,208 @@
+/* VS Code Glass Theme */
+
+/* =========================
+   VARIABLES
+========================= */
+:root {
+  --accent:      rgba(80, 180, 255, 0.70);
+  --accent-lo:   rgba(80, 180, 255, 0.12);
+  --accent-dim:  rgba(80, 180, 255, 0.06);
+  --white-lo:    rgba(255, 255, 255, 0.06);
+  --white-hi:    rgba(255, 255, 255, 0.16);
+  --white-full:  rgba(255, 255, 255, 0.95);
+  --surface:     rgba(8, 8, 14, 0.25);
+  --surface-deep:rgba(10, 10, 18, 0.60);
+  --blur:        blur(4px);
+  --ease:        cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================
+   GLOBAL
+========================= */
+body,
+.monaco-workbench {
+  background: transparent !important;
+}
+
+#vscode-cursor-glow {
+  position: fixed;
+  pointer-events: none;
+  z-index: 999999;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle,
+    rgba(80, 180, 255, 0.20) 0%,
+    rgba(80, 180, 255, 0.10) 40%,
+    transparent 70%
+  );
+  filter: blur(8px);
+  mix-blend-mode: screen;
+}
+
+/* =========================
+   PANELS
+   Titlebar gets no z-index/position/backdrop-filter to avoid
+   stacking-context traps that break dropdown positioning.
+========================= */
+.part.titlebar {
+  background: var(--surface) !important;
+  border-bottom: 1px solid var(--white-lo) !important;
+}
+.part.activitybar,
+.part.panel,
+.tabs-and-actions-container,
+.breadcrumbs-control {
+  background: var(--surface) !important;
+  backdrop-filter: var(--blur) !important;
+  -webkit-backdrop-filter: var(--blur) !important;
+}
+
+/* Status bar — no backdrop-filter to avoid stacking-context traps on context menus */
+.part.statusbar {
+  background: var(--surface) !important;
+}
+
+/* Sidebar — glass card */
+.part.sidebar {
+  background: var(--surface) !important;
+  backdrop-filter: var(--blur) !important;
+  -webkit-backdrop-filter: var(--blur) !important;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+}
+
+/* Individual borders */
+.part.activitybar       { border-right:  1px solid var(--white-lo) !important; }
+.part.panel             { border-top:    1px solid var(--white-lo) !important; }
+.part.statusbar         { border-top:    1px solid var(--white-lo) !important; }
+.tabs-and-actions-container { border-bottom: 1px solid var(--white-lo) !important; }
+
+/* Transparent children */
+.explorer-folders-view,
+.pane-header,
+.sidebar .composite,
+.panel-pane-header,
+.part.panel .composite,
+.breadcrumbs-control .monaco-breadcrumb-item {
+  background: transparent !important;
+}
+
+/* Activity bar icon fade — scoped so dropdown menus aren't dimmed */
+.part.activitybar .action-label {
+  opacity: 0.55;
+  transition: opacity 0.2s var(--ease);
+}
+.part.activitybar .action-label:hover { opacity: 1; }
+
+/* =========================
+   EDITOR
+========================= */
+.editor-group-container {
+  background: transparent !important;
+  border-radius: 10px;
+  margin: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+}
+
+.part.editor,
+.part.editor > .content,
+.monaco-editor,
+.monaco-editor-background,
+.monaco-editor .margin,
+.monaco-editor .view-overlays,
+.monaco-editor .scroll-decoration,
+.monaco-editor .lines-content,
+.monaco-editor .glyph-margin,
+.monaco-editor .margin-view-overlays {
+  background: transparent !important;
+}
+
+.monaco-editor .current-line {
+  background: rgba(80, 180, 255, 0.10) !important;
+  border: 1px solid rgba(80, 180, 255, 0.80) !important;
+  border-radius: 4px;
+}
+
+/* =========================
+   TABS
+========================= */
+.tab {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 6px 6px 0 0 !important;
+  margin: 4px 2px 0 !important;
+  transition: background 0.15s var(--ease) !important;
+}
+.tab:hover                { background: var(--white-hi) !important; }
+.tab.active               { background: var(--accent-lo) !important;
+                            border-bottom: 2px solid var(--accent) !important;
+                            box-shadow: 0 0 16px var(--accent-dim) !important; }
+.tab-label                { opacity: 0.6; }
+.tab.active .tab-label    { opacity: 1; }
+
+/* =========================
+   FILE TREE
+========================= */
+.monaco-list .monaco-list-row {
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: background 0.15s var(--ease), border-color 0.15s var(--ease);
+}
+.monaco-list .monaco-list-row:hover {
+  background: var(--white-hi) !important;
+  border-color: var(--white-lo);
+  cursor: pointer;
+}
+.monaco-list .monaco-list-row.selected,
+.monaco-list-row[aria-selected="true"] {
+  background: var(--accent-lo) !important;
+  border-color: rgba(80, 180, 255, 0.20);
+}
+.monaco-list .monaco-list-row.focused      { background: rgba(80,180,255,0.10) !important; outline: none !important; }
+.monaco-list:not(:focus) .monaco-list-row.selected { background: rgba(255,255,255,0.07) !important; }
+.monaco-list-row:hover .monaco-icon-label { color: var(--white-full) !important; }
+
+/* =========================
+   COMMAND PALETTE
+========================= */
+.quick-input-widget {
+  background: var(--surface-deep) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--white-hi) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.4), inset 0 1px 0 var(--white-lo) !important;
+}
+.quick-input-list .monaco-list-row:hover   { background: var(--white-hi) !important; border-radius: 6px; }
+.quick-input-list .monaco-list-row.focused { background: var(--accent-lo) !important; border-radius: 6px; }
+
+/* =========================
+   NOTIFICATIONS
+========================= */
+.notification-toast {
+  background: rgba(12, 12, 20, 0.55) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--white-lo) !important;
+  border-radius: 10px !important;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+::-webkit-scrollbar            { width: 4px; height: 4px; }
+::-webkit-scrollbar-track      { background: transparent; }
+::-webkit-scrollbar-thumb      { background: rgba(255,255,255,0.12); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover{ background: rgba(80,180,255,0.30); }
+
+/* =========================
+   MISC
+========================= */
+.minimap                  { opacity: 0.35; transition: opacity 0.2s var(--ease); }
+.minimap:hover            { opacity: 0.65; }
+.core-guide               { opacity: 0.18 !important; }
