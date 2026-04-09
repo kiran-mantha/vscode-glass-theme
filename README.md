@@ -60,6 +60,28 @@ Completely close and reopen Visual Studio Code for the changes to take effect.
 - Try reloading VSCode with `Ctrl+Shift+P` → "Reload Window" after enabling the features
 - Check the Output panel (`Ctrl+Shift+U`) for any error messages from the Custom CSS and JS Loader
 
+## Bonus Tip: Blur Effect When GlassIt-VSC is Disabled
+
+If you disable the GlassIt-VSC extension but still want to see a blur effect in the background, you can add the following CSS rule to your `glass.css` file:
+
+```css
+/* Background blur effect */
+#monaco-editor .view-lines {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Apply blur to activity bar, side bar, status bar */
+.activity-bar, .side-bar, .status-bar {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+```
+
+This will give you a subtle glass-like blur effect even when the GlassIt-VSC extension is disabled, using only CSS backdrop-filter.
+> Note:
+> Do not forget to reload the **Custom CSS and JS Loader** extension after updating the file.
+
 ## File Structure Example
 
 After setup, your VSCode user directory should contain:
